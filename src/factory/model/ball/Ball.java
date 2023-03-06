@@ -42,7 +42,7 @@ public abstract class Ball {
 
     @Override
     public String toString() {
-        return  getBallType() +
+        return getBallType() +
                 " size=" + size +
                 ", ballColor=" + ballColor +
                 ", price=" + price;
