@@ -1,5 +1,3 @@
-package test;
-
 import factory.basket.Basket;
 import factory.model.ball.*;
 import factory.sort.HeapSort;
