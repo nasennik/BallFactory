@@ -90,33 +90,26 @@ class QuickSortTest {
 
     @Test
     public void testSortWithEmptyBasket() {
-        // Create an empty basket
         Basket emptyBasket = new Basket();
 
         Comparator<Ball> comparator = Comparator.comparing(Ball::getPrice);
         quickSort.sort(emptyBasket.getBalls(), comparator);
 
-        // Check that the list of balls in the basket is still empty
         assertEquals(0, emptyBasket.getBalls().size());
     }
 
     @Test
     public void testSortWithSingleBallBasket() {
-        // Create a basket with a single ball
-        //List<Ball> balls = new ArrayList<>();
+
         Basket<Ball> oneBallBasket = new Basket();
 
         oneBallBasket.addBall(new VolleyBall(4, BallColor.WHITE, 10));
 
-        // Sort the list of balls in the basket using heap sort
-        // HeapSort<Ball> sorter = new HeapSort<>();
         Comparator<Ball> comparator = Comparator.comparing(Ball::getPrice);
         quickSort.sort(oneBallBasket.getBalls(), comparator);
 
-        // Check that the list of balls in the basket contains a single ball
         assertEquals(1, oneBallBasket.getBalls().size());
 
-        // Check that the ball is the same as the original ball
         assertEquals(new VolleyBall(4, BallColor.WHITE, 10), oneBallBasket.getBalls().get(0));
     }
 
