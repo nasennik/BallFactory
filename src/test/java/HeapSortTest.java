@@ -46,7 +46,7 @@ class HeapSortTest {
         heapSort.sort(balls, comparator);
 
         for (int i = 0; i < basket.getBalls().size() - 1; i++) {
-            assertEquals(true, comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
+            assertTrue(comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
         }
     }
     @Test
@@ -57,7 +57,7 @@ class HeapSortTest {
         heapSort.sort(basket.getBalls(), comparator);
 
         for (int i = 0; i < balls.size() - 1; i++) {
-            assertEquals(true, comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
+            assertTrue(comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
         }
     }
     @Test
@@ -68,7 +68,7 @@ class HeapSortTest {
         heapSort.sort(balls, comparator);
 
         for (int i = 0; i < balls.size() - 1; i++) {
-            assertEquals(true, comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
+            assertTrue( comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
         }
     }
     @Test
@@ -79,13 +79,13 @@ class HeapSortTest {
         heapSort.sort(balls, comparator);
 
         for (int i = 0; i < balls.size() - 1; i++) {
-            assertEquals(true, comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
+            assertTrue(comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
         }
     }
 
     @Test
     public void testSortWithEmptyBasket() {
-        Basket emptyBasket = new Basket();
+        Basket<Ball> emptyBasket = new Basket<>();
 
         Comparator<Ball> comparator = Comparator.comparing(Ball::getPrice);
         heapSort.sort(emptyBasket.getBalls(), comparator);
@@ -95,7 +95,7 @@ class HeapSortTest {
 
     @Test
     public void testSortWithSingleBallBasket() {
-        Basket<Ball> oneBallBasket = new Basket();
+        Basket<Ball> oneBallBasket = new Basket<>();
 
         oneBallBasket.addBall(new VolleyBall(4, BallColor.WHITE, 10));
 
@@ -103,7 +103,6 @@ class HeapSortTest {
         heapSort.sort(oneBallBasket.getBalls(), comparator);
 
         assertEquals(1, oneBallBasket.getBalls().size());
-
         assertEquals(new VolleyBall(4, BallColor.WHITE, 10), oneBallBasket.getBalls().get(0));
     }
 

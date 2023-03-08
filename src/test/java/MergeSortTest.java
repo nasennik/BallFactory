@@ -101,7 +101,7 @@ class MergeSortTest {
 
     @Test
     public void testSortWithSingleBallBasket() {
-        Basket<Ball> oneBallBasket = new Basket();
+        Basket<Ball> oneBallBasket = new Basket<>();
 
         oneBallBasket.addBall(new VolleyBall(4, BallColor.WHITE, 10));
 
