@@ -22,29 +22,29 @@ public class MergeSort implements Sortable {
         return list;
     }
 
-    private static <T> void merge(List<T> list, List<T> left, List<T> right, Comparator<T> comparator) {
-        int i = 0;
-        int j = 0;
+    private static <T> void merge(List<T> list, List<T> leftList, List<T> rightList, Comparator<T> comparator) {
+        int counterLeft = 0;
+        int counterRight = 0;
         List<T> result = new ArrayList<>(list.size());
 
-        while (i < left.size() && j < right.size()) {
-            if (comparator.compare(left.get(i), right.get(j)) <= 0) {
-                result.add(left.get(i));
-                i++;
+        while (counterLeft < leftList.size() && counterRight < rightList.size()) {
+            if (comparator.compare(leftList.get(counterLeft), rightList.get(counterRight)) <= 0) {
+                result.add(leftList.get(counterLeft));
+                counterLeft++;
             } else {
-                result.add(right.get(j));
-                j++;
+                result.add(rightList.get(counterRight));
+                counterRight++;
             }
         }
 
-        while (i < left.size()) {
-            result.add(left.get(i));
-            i++;
+        while (counterLeft < leftList.size()) {
+            result.add(leftList.get(counterLeft));
+            counterLeft++;
         }
 
-        while (j < right.size()) {
-            result.add(right.get(j));
-            j++;
+        while (counterRight < rightList.size()) {
+            result.add(rightList.get(counterRight));
+            counterRight++;
         }
 
         for (int k = 0; k < result.size(); k++) {

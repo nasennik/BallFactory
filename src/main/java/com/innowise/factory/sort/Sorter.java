@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Sorter<T extends Ball>{
-    Basket<T> basket;
+    private Basket<T> basket;
     public Sorter(Basket<T> basket) {
         this.basket = basket;
     }
