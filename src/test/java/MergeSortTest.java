@@ -1,116 +1,102 @@
-import factory.basket.Basket;
-import factory.model.ball.*;
-import factory.sort.HeapSort;
-import factory.sort.MergeSort;
-import factory.sort.SortType;
+import com.innowise.factory.basket.Basket;
+import com.innowise.factory.model.ball.*;
+import com.innowise.factory.sort.SortType;
+import com.innowise.factory.sort.Sorter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MergeSortTest {
-
-    private List<Ball> balls;
-    private Basket<Ball> basket;
-    private MergeSort mergeSort;
+    private List<Ball> basketContent;
+    private Comparator<Ball> comparator;
+    private Sorter<Ball> sorter;
 
     @BeforeEach
     public void SetUp() {
-        basket = new Basket<>();
 
-        basket.addBall(new SoccerBall(4, BallColor.WHITE, 10));
-        basket.addBall(new BasketBall(5, BallColor.BLUE, 20));
-        basket.addBall(new VolleyBall(3, BallColor.RED, 5));
-        basket.addBall(new SoccerBall(7, BallColor.YELLOW, 30));
-        basket.addBall(new VolleyBall(2, BallColor.BLUE, 3));
-        basket.addBall(new BasketBall(6, BallColor.GREEN, 25));
-        basket.addBall(new VolleyBall(1, BallColor.YELLOW, 2));
-        basket.addBall(new SoccerBall(4, BallColor.RED, 15));
-        basket.addBall(new VolleyBall(5, BallColor.GREEN, 8));
-        basket.addBall(new BasketBall(3, BallColor.BLUE, 12));
+        Basket<Ball> basket = new Basket<>();
+        basket.addBall(new Ball(BallType.VOLLEYBALL,4, BallColor.WHITE, 10));
+        basket.addBall(new Ball(BallType.SOCCER,7, BallColor.BLUE, 34));
+        basket.addBall(new Ball(BallType.BASKETBALL,9, BallColor.GREEN, 56));
+        basket.addBall(new Ball(BallType.VOLLEYBALL,6, BallColor.YELLOW, 80));
+        basket.addBall(new Ball(BallType.SOCCER,5, BallColor.WHITE, 11));
+        basket.addBall(new Ball(BallType.BASKETBALL,2, BallColor.BLUE, 56));
+        basket.addBall(new Ball(BallType.VOLLEYBALL,3, BallColor.WHITE, 48));
+        basket.addBall(new Ball(BallType.SOCCER,1, BallColor.BLUE, 67));
+        basket.addBall(new Ball(BallType.BASKETBALL,10, BallColor.GREEN, 89));
+        basket.addBall(new Ball(BallType.VOLLEYBALL,5, BallColor.YELLOW, 22));
+        basketContent = basket.getBasketContent();
 
-        balls = basket.getBalls();
-
-        mergeSort = new MergeSort();
+        sorter = new Sorter<>(basket);
 
     }
 
     @Test
     public void testSortBySize() {
 
-        Comparator<Ball> comparator = Comparator.comparing(Ball::getSize);
-        basket.sort(SortType.MERGE_SORT, comparator);
-        mergeSort.sort(balls, comparator);
+        comparator = Comparator.comparing(Ball::getSize);
+        sorter.sort(SortType.MERGE_SORT, comparator);
 
-        for (int i = 0; i < balls.size() - 1; i++) {
-            assertTrue(comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
+        for (int i = 0; i < basketContent.size() - 1; i++) {
+            assertTrue(comparator.compare(basketContent.get(i), basketContent.get(i + 1)) <= 0);
         }
     }
-
     @Test
     public void testSortByType() {
 
-        Comparator<Ball> comparator = Comparator.comparing(Ball::getBallType);
-        basket.sort(SortType.MERGE_SORT, comparator);
-        mergeSort.sort(balls, comparator);
+        comparator = Comparator.comparing(Ball::getBallType);
+        sorter.sort(SortType.MERGE_SORT, comparator);
 
-        for (int i = 0; i < balls.size() - 1; i++) {
-            assertTrue( comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
+        for (int i = 0; i < basketContent.size() - 1; i++) {
+            assertTrue(comparator.compare(basketContent.get(i), basketContent.get(i + 1)) <= 0);
         }
     }
-
     @Test
     public void testSortByColor() {
 
-        Comparator<Ball> comparator = Comparator.comparing(Ball::getBallColor);
-        basket.sort(SortType.MERGE_SORT, comparator);
-        mergeSort.sort(balls, comparator);
+        comparator = Comparator.comparing(Ball::getBallColor);
+        sorter.sort(SortType.MERGE_SORT, comparator);
 
-        for (int i = 0; i < balls.size() - 1; i++) {
-            assertTrue (comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
+        for (int i = 0; i < basketContent.size() - 1; i++) {
+            assertTrue(comparator.compare(basketContent.get(i), basketContent.get(i + 1)) <= 0);
         }
     }
-
-
     @Test
     public void testSortByPrice() {
 
-        Comparator<Ball> comparator = Comparator.comparing(Ball::getPrice);
-        basket.sort(SortType.MERGE_SORT, comparator);
-        mergeSort.sort(balls, comparator);
+        comparator = Comparator.comparing(Ball::getPrice);
+        sorter.sort(SortType.MERGE_SORT, comparator);
 
-        for (int i = 0; i < balls.size() - 1; i++) {
-            assertTrue(comparator.compare(balls.get(i), balls.get(i + 1)) <= 0);
+        for (int i = 0; i < basketContent.size() - 1; i++) {
+            assertTrue(comparator.compare(basketContent.get(i), basketContent.get(i + 1)) <= 0);
         }
     }
 
     @Test
     public void testSortWithEmptyBasket() {
-
         Basket<Ball> emptyBasket = new Basket<>();
 
-        Comparator<Ball> comparator = Comparator.comparing(Ball::getPrice);
-        mergeSort.sort(emptyBasket.getBalls(), comparator);
+        comparator = Comparator.comparing(Ball::getPrice);
+        sorter.sort(SortType.MERGE_SORT, comparator);
 
-        assertEquals(0, emptyBasket.getBalls().size());
+        assertEquals(0, emptyBasket.getBasketContent().size());
     }
 
     @Test
     public void testSortWithSingleBallBasket() {
         Basket<Ball> oneBallBasket = new Basket<>();
+        oneBallBasket.addBall(new Ball(BallType.VOLLEYBALL, 4, BallColor.RED, 8));
 
-        oneBallBasket.addBall(new VolleyBall(4, BallColor.WHITE, 10));
+        comparator = Comparator.comparing(Ball::getPrice);
+        sorter.sort(SortType.MERGE_SORT, comparator);
 
-        Comparator<Ball> comparator = Comparator.comparing(Ball::getPrice);
-        mergeSort.sort(oneBallBasket.getBalls(), comparator);
 
-        assertEquals(1, oneBallBasket.getBalls().size());
-
-        assertEquals(new VolleyBall(4, BallColor.WHITE, 10), oneBallBasket.getBalls().get(0));
+        assertEquals(1, oneBallBasket.getBasketContent().size());
     }
+
 
 }

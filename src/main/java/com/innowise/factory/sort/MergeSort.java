@@ -1,24 +1,25 @@
-package factory.sort;
+package com.innowise.factory.sort;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class MergeSort implements Sort {
+public class MergeSort implements Sortable {
 
     @Override
-    public <T> void sort(List<T> list, Comparator<T> comparator) {
+    public <T> List<T> sort(List<T> list, Comparator<T> comparator) {
         if (list.size() > 1) {
-            int mid = list.size() / 2;
+            int midIndex = list.size() / 2;
 
-            List<T> left = list.subList(0, mid);
-            List<T> right = list.subList(mid, list.size());
+            List<T> leftList = list.subList(0, midIndex);
+            List<T> rightList = list.subList(midIndex, list.size());
 
-            sort(left, comparator);
-            sort(right, comparator);
+            sort(leftList, comparator);
+            sort(rightList, comparator);
 
-            merge(list, left, right, comparator);
+            merge(list, leftList, rightList, comparator);
         }
+        return list;
     }
 
     private static <T> void merge(List<T> list, List<T> left, List<T> right, Comparator<T> comparator) {
@@ -50,4 +51,5 @@ public class MergeSort implements Sort {
             list.set(k, result.get(k));
         }
     }
+
 }

@@ -1,15 +1,14 @@
-package factory.sort;
-
-import factory.sort.Sort;
+package com.innowise.factory.sort;
 
 import java.util.*;
 
-public class QuickSort implements Sort {
+public class QuickSort implements Sortable {
 
 
     @Override
-    public <T> void sort(List<T> list, Comparator<T> comparator) {
+    public <T> List<T> sort(List<T> list, Comparator<T> comparator) {
         quickSort(list, 0, list.size() - 1, comparator);
+        return list;
     }
 
     private static <T> void quickSort(List<T> list, int left, int right, Comparator<T> comparator) {

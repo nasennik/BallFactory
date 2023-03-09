@@ -1,5 +1,5 @@
-import factory.basket.Basket;
-import factory.model.ball.*;
+import com.innowise.factory.basket.Basket;
+import com.innowise.factory.model.ball.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,36 +12,36 @@ class BasketTest {
     @BeforeEach
     public void setUp() {
         basket = new Basket<>();
-        basket.addBall(new VolleyBall(4, BallColor.WHITE, 10));
-        basket.addBall(new SoccerBall(5, BallColor.BLUE, 20));
-        basket.addBall(new VolleyBall(3, BallColor.RED, 5));
-        basket.addBall(new BasketBall(7, BallColor.YELLOW, 30));
-        basket.addBall(new VolleyBall(2, BallColor.BLUE, 3));
-        basket.addBall(new BasketBall(6, BallColor.GREEN, 25));
-        basket.addBall(new SoccerBall(1, BallColor.YELLOW, 2));
-        basket.addBall(new BasketBall(4, BallColor.RED, 15));
-        basket.addBall(new SoccerBall(5, BallColor.GREEN, 8));
-        basket.addBall(new BasketBall(3, BallColor.BLUE, 12));
+        basket.addBall(new Ball(BallType.VOLLEYBALL,4, BallColor.WHITE, 10));
+        basket.addBall(new Ball(BallType.SOCCER,7, BallColor.BLUE, 34));
+        basket.addBall(new Ball(BallType.BASKETBALL,9, BallColor.GREEN, 56));
+        basket.addBall(new Ball(BallType.VOLLEYBALL,6, BallColor.YELLOW, 80));
+        basket.addBall(new Ball(BallType.SOCCER,5, BallColor.WHITE, 11));
+        basket.addBall(new Ball(BallType.BASKETBALL,2, BallColor.BLUE, 56));
+        basket.addBall(new Ball(BallType.VOLLEYBALL,3, BallColor.WHITE, 48));
+        basket.addBall(new Ball(BallType.SOCCER,1, BallColor.BLUE, 67));
+        basket.addBall(new Ball(BallType.BASKETBALL,10, BallColor.GREEN, 89));
+        basket.addBall(new Ball(BallType.VOLLEYBALL,5, BallColor.YELLOW, 22));
     }
 
     @Test
     public void testAdd10ElementsSizeMustBe10() {
-        assertEquals(10, basket.getBalls().size());
+        assertEquals(10, basket.getBasketContent().size());
     }
 
     @Test
     public void testElementRemovesSizeMustBeDecreased() {
-        VolleyBall volleyBall = new VolleyBall(10, BallColor.GREEN, 43);
+        Ball volleyBall = new Ball(BallType.VOLLEYBALL, 10, BallColor.GREEN, 43);
         basket.addBall(volleyBall);
-        assertEquals(11, basket.getBalls().size());
+        assertEquals(11, basket.getBasketContent().size());
         basket.removeBall(volleyBall);
-        assertEquals(10, basket.getBalls().size());
+        assertEquals(10, basket.getBasketContent().size());
     }
 
     @Test
     public void testAddNullElementSizeMustNotChange() {
         basket.addBall(null);
-        assertEquals(10, basket.getBalls().size());
+        assertEquals(10, basket.getBasketContent().size());
     }
 
 

@@ -1,4 +1,4 @@
-package factory.model.ball;
+package com.innowise.factory.model.ball;
 
 public enum BallType {
     SOCCER, BASKETBALL, VOLLEYBALL;
